@@ -12,7 +12,7 @@
 <img src="{{article.thumbnail.url}}">
 <p>{{article.status}}</p>
 <div>
-{% for cat in article.category_published.article_publish %}
+{% for cat in article.category_published.all %}
 <p><a href="{% url 'Blog:category' cat.slug %}">#{{cat.title}}</a></p>
 {% endfor %}
 </div>

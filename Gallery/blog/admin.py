@@ -7,7 +7,7 @@ admin.site.site_title = 'صفحه مدیریت گالری عباسیان'
 admin.site.index_title = 'گالری عباسیان'
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('title','slug','position','status')
+    list_display = ('position','title','slug','parent','status')
     list_filter = ('status',)
     search_fields = ['title', 'slug']
     prepopulated_fields = {"slug": ("title",)}

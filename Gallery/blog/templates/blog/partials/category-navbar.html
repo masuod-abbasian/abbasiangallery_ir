@@ -1,5 +1,11 @@
 {% for cat in categories %}
-<div>
-<a href="{% url 'Blog:category' cat.slug %}">{{cat.title}}</a>
-<div>
+    {% if cat.parent == null%}
+        <div>
+            <a href="{% url 'Blog:category' cat.slug %}">{{cat.title}}</a>
+        <div>
+        {% if cat.children.active %}
+            {% include 'blog/partials/category-loop.html' %}
+        {% endif %}
+    {% endif %}
+
 {% endfor %}

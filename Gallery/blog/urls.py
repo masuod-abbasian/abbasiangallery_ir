@@ -7,4 +7,5 @@ urlpatterns = [
     path('page/<int:page>', Blog_Home, name='blog-home'),
     path('article/<slug:slug>/', Detail, name='detail'),
     path('category/<slug:slug>/', category , name='category'),
+    path('category/<slug:slug>/page/<int:page>', category , name='category'),
 ]
