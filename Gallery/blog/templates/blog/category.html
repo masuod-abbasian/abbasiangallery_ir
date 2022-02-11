@@ -1,0 +1,19 @@
+{% load static %}
+{% load base_tags %}
+{% title %}
+<hr>
+{% category_navbar %}
+<hr>
+<hr>
+{% for article in category.articles.article_publish %}
+<p>{{article.title}}</p>
+<p>{{article.description|truncatewords:20}}</p>
+<p>{{article.jpublished}}</p>
+<img src="{{article.thumbnail.url}}">
+<div>
+{% for cat in article.category_published.article_publish %}
+<p><a href="{% url 'Blog:category' cat.slug %}">#{{cat.title}}</a></p>
+{% endfor %}
+</div>
+<hr>
+{% endfor %}
