@@ -1,0 +1,41 @@
+{% load static %}
+{% load base_tags %}
+{% title %}
+<hr>
+{% category_navbar %}
+<hr>
+<hr>
+{% block header %}{% endblock %}
+<hr>
+{% for article in object_list %}
+<div>
+    <p>{{article.title}}</p>
+    <p>{{article.description|truncatewords:20}}</p>
+    <p>{{article.jpublished}}</p>
+    <p><a href="{% url 'Blog:author' article.author %}">{{article.author.get_full_name}}</a></p>
+    <img src="{{article.thumbnail.url}}">
+    {% for cat in article.category.active %}
+    <div>
+        <p><a href="{% url 'Blog:category' cat.slug %}">#{{cat.title}}</a></p>
+    </div>
+    {% endfor %}
+    <hr>
+</div>
+{% endfor %}
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+        <a href="{% block previous_page_url_first %}{% endblock %}">&laquo; first</a>
+        <a href="{% block previous_page_url %}{% endblock %}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+        <a href="{% block next_page_url %}{% endblock %}">next</a>
+        <a href="{% block next_page_url_last %}{% endblock %}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>

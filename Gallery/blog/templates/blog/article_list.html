@@ -1,0 +1,16 @@
+{% extends 'blog/list.html' %}
+
+{% block header %}{% endblock %}
+
+{% block previous_page_url_first %}
+    {% url 'Blog:blog-home' %}
+{% endblock %}
+{% block previous_page_url%}
+    {% url 'Blog:blog-home' page_obj.previous_page_number %}
+{% endblock %}
+{% block next_page_url%}
+    {% url 'Blog:blog-home' page_obj.next_page_number %}
+{% endblock %}
+{% block next_page_url_last %}
+    {% url 'Blog:blog-home' page_obj.paginator.num_pages %}
+{% endblock %}

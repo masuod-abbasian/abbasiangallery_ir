@@ -1,0 +1,16 @@
+{% extends 'blog/list.html' %}
+
+{% block header %}<p>{{author.get_full_name}}</P>{% endblock %}
+
+{% block previous_page_url_first %}
+    {% url 'Blog:author' author.username %}
+{% endblock %}
+{% block previous_page_url %}
+    {% url 'Blog:author' author.username page_obj.previous_page_number %}
+{% endblock %}
+{% block next_page_url %}
+    {% url 'Blog:author' author.username page_obj.next_page_number %}
+{% endblock %}
+{% block next_page_url_last %}
+    {% url 'Blog:author' author.username page_obj.paginator.num_pages %}
+{% endblock %}

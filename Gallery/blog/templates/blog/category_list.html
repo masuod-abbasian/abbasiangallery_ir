@@ -1,0 +1,16 @@
+{% extends 'blog/list.html' %}
+
+{% block header %}<p>{{category.title}}</P>{% endblock %}
+
+{% block previous_page_url_first %}
+    {% url 'Blog:category' category.slug %}
+{% endblock %}
+{% block previous_page_url %}
+    {% url 'Blog:category' category.slug page_obj.previous_page_number %}
+{% endblock %}
+{% block next_page_url %}
+    {% url 'Blog:category' category.slug page_obj.next_page_number %}
+{% endblock %}
+{% block next_page_url_last %}
+    {% url 'Blog:category' category.slug page_obj.paginator.num_pages %}
+{% endblock %}

@@ -1,7 +1,8 @@
-from turtle import update
 from django.db import models
 from django.utils import timezone
 from extensions.utils import jalali_converter
+from django.utils.html import format_html
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -32,6 +33,7 @@ class Article(models.Model):
         ('d','پیش‌نویس'),
         ('p','منتشرشده'),
     )
+    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, verbose_name="نویسنده", related_name='articles')
     title = models.CharField(max_length=250, verbose_name ='عنوان')
     slug = models.SlugField(max_length=250, unique=True, verbose_name ='آدرس')
     category = models.ManyToManyField(Category, verbose_name='دسته‌بندی', related_name='articles')
@@ -55,5 +57,9 @@ class Article(models.Model):
 
     def category_published(self):
         return self.category.filter(status=True)
-    
+        
+    def thumbnail_tag(self):
+        return format_html('<img width=100 hight=75 style="border-radius: 5px" src="{}">'.format(self.thumbnail.url))
+    thumbnail_tag.short_description = 'تصویر'
+
     objects = ArticleManager()
